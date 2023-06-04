@@ -1,6 +1,13 @@
 # fresh project
 
+
+
 ### Usage
+
+Install Deno
+```
+curl -fsSL https://deno.land/x/install/install.sh | sh
+```
 
 Start the project:
 
