@@ -1,4 +1,3 @@
-import { PageProps } from "https://deno.land/x/fresh@1.1.5/server.ts";
 import { useRef, useEffect, useCallback, useState } from "preact/hooks";
 declare const L: any;
 
@@ -10,7 +9,7 @@ type Location = {
   lng: string;
 };
 
-export default function MapComponent(props: PageProps) {
+export default function MapComponent() {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<any>(null);
   const [sheet, setSheet] = useState<Location[]>([]);
