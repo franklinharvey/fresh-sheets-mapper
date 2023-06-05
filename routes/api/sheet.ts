@@ -2,8 +2,8 @@ import { HandlerContext } from "$fresh/server.ts";
 import { config } from "https://deno.land/x/dotenv/mod.ts";
 
 // GET https://sheets.googleapis.com/v4/spreadsheets/1Po-5tui2kbZbyQS9eMaBuiM22VU75kxTnXmwWIHy7qc/values/StuffToDo!C4:C5
-const env = config();
-const key = env.GOOGLE_API_KEY;
+config({ export: true });
+const key = Deno.env.get("GOOGLE_API_KEY");
 const spreadsheetId = "1Po-5tui2kbZbyQS9eMaBuiM22VU75kxTnXmwWIHy7qc";
 const range = "StuffToDo!A4:D5";
 
@@ -22,7 +22,6 @@ export const handler = async (
   // Specify the spreadsheet ID and range
 
   // Read the values from the spreadsheet
-  console.log(key.slice(0, 2));
   const response = await fetch(
     `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}?key=${key}`
   );
