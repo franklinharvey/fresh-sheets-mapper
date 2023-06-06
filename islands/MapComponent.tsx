@@ -72,9 +72,8 @@ export default function MapComponent() {
       if (!mapRef.current) {
         mapRef.current = new L.Map(containerRef.current).setView([0, 0], 13);
       }
-      L.tileLayer('https://{s}.tile.openstreetmap.de/{z}/{x}/{y}.png', {
-        maxZoom: 18,
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       }).addTo(mapRef.current);
     }
   }, []);
