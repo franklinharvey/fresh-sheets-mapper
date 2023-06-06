@@ -72,9 +72,10 @@ export default function MapComponent() {
       if (!mapRef.current) {
         mapRef.current = new L.Map(containerRef.current).setView([0, 0], 13);
       }
-      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        attribution:
-          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      L.tileLayer('https://maptiles.p.rapidapi.com/en/map/v1/{z}/{x}/{y}.png?rapidapi-key={apikey}', {
+        attribution: '&copy; <a href="http://www.maptilesapi.com/">MapTiles API</a>, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        apikey: '<your apikey>',
+        maxZoom: 19
       }).addTo(mapRef.current);
     }
   }, []);
