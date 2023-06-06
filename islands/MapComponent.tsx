@@ -7,7 +7,22 @@ type Location = {
   note: string;
   lat: string;
   lng: string;
+  color: string;
 };
+
+const markerHtmlStyles = (color: string) => `
+  background-color: ${color};
+  width: 2rem;
+  height: 2rem;
+  display: block;
+  left: -1.5rem;
+  top: -1.5rem;
+  position: relative;
+  border-radius: 3rem 3rem 0;
+  transform: rotate(45deg);
+  border: 1px solid #FFFFFF;
+  box-shadow: -1px -1px 8px 0px #00000050;
+`;
 
 export default function MapComponent() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -29,8 +44,22 @@ export default function MapComponent() {
     const points: [string, string][] = [];
     if (mapRef.current) {
       sheet.forEach((row) => {
-        L.marker([row.lat, row.lng])
+        const icon = L.divIcon({
+          className: "my-custom-pin",
+          iconAnchor: [0, 24],
+          labelAnchor: [-6, 0],
+          popupAnchor: [0, -36],
+          html: `<span style="${markerHtmlStyles(row.color) ?? `grey`}" />`,
+        });
+        L.marker([row.lat, row.lng], { icon })
           .bindTooltip(row.name)
+          .bindPopup(
+            ` <p>
+              <b>${row.name}</b>
+              <br />
+              ${row.note}
+            </p>`
+          )
           .addTo(mapRef.current);
         points.push([row.lat, row.lng]);
       });

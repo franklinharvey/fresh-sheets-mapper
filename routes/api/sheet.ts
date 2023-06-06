@@ -1,11 +1,11 @@
 import { HandlerContext } from "$fresh/server.ts";
-import { config } from "https://deno.land/x/dotenv/mod.ts";
+import { config } from "https://deno.land/x/dotenv@v3.2.2/mod.ts";
 
 // GET https://sheets.googleapis.com/v4/spreadsheets/1Po-5tui2kbZbyQS9eMaBuiM22VU75kxTnXmwWIHy7qc/values/StuffToDo!C4:C5
 config({ export: true });
 const key = Deno.env.get("GOOGLE_API_KEY");
 const spreadsheetId = "1Po-5tui2kbZbyQS9eMaBuiM22VU75kxTnXmwWIHy7qc";
-const range = "StuffToDo!A4:D5";
+const range = "StuffToDo!A4:Z1000";
 
 type R = {
   name: string;
@@ -13,6 +13,7 @@ type R = {
   note: string;
   lat: string;
   lng: string;
+  color: string;
 };
 
 export const handler = async (
@@ -31,7 +32,7 @@ export const handler = async (
     throw new Error(response.statusText);
   }
 
-  const data: { values: [string, string, string, string][] } =
+  const data: { values: [string, string, string, string, string][] } =
     await response.json();
 
   const values = data.values;
@@ -44,6 +45,7 @@ export const handler = async (
         address: row[2],
         lat: row[3].split(", ")[0],
         lng: row[3].split(", ")[1],
+        color: row[4],
       });
     });
   } else {
