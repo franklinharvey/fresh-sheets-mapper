@@ -39,14 +39,18 @@ export const handler = async (
   const ret: R[] = [];
   if (values) {
     values.forEach((row: string[]) => {
-      ret.push({
-        name: row[0],
-        note: row[1],
-        address: row[2],
-        lat: row[3].split(", ")[0],
-        lng: row[3].split(", ")[1],
-        color: row[4],
-      });
+      try {
+        ret.push({
+          name: row[0],
+          note: row[1],
+          address: row[2],
+          lat: row[3].split(", ")[0],
+          lng: row[3].split(", ")[1],
+          color: row[4],
+        });
+      } catch (error) {
+        console.error(`Error: ${error}. Row: ${row}`);
+      }
     });
   } else {
     console.error("No data found.");

@@ -21,7 +21,7 @@ const markerHtmlStyles = (color: string) => `
   border-radius: 3rem 3rem 0;
   transform: rotate(45deg);
   border: 1px solid #FFFFFF;
-  box-shadow: -1px -1px 8px 0px #00000050;
+  box-shadow: -1px -1px 8px 0px #fff;
 `;
 
 export default function MapComponent() {
@@ -73,7 +73,6 @@ export default function MapComponent() {
         mapRef.current = new L.Map(containerRef.current).setView([0, 0], 13);
       }
       L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        maxZoom: 19,
         attribution:
           '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       }).addTo(mapRef.current);
