@@ -5,7 +5,7 @@ import { config } from "https://deno.land/x/dotenv@v3.2.2/mod.ts";
 config({ export: true });
 const key = Deno.env.get("GOOGLE_API_KEY");
 const spreadsheetId = "1Po-5tui2kbZbyQS9eMaBuiM22VU75kxTnXmwWIHy7qc";
-const range = "StuffToDo!A4:Z1000";
+const range = "Tokyo Activities!A4:Z1000";
 
 type R = {
   name: string;
